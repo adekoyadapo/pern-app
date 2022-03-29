@@ -1,0 +1,42 @@
+version: '3.8'
+services:
+  client:
+    container_name: frontend
+    image: client
+    restart: always
+    hostname: frontend
+    build:
+      dockerfile: Dockerfile
+      context: ./client
+    ports:
+      - "8000:80"
+  backend:
+    container_name: backend
+    hostname: backend
+    image: backend
+    restart: always
+    build:
+      dockerfile: ./Dockerfile
+      context: ./server
+    ports:
+      - "5500:5000"
+  db:
+    container_name: pg_container
+    image: postgres_db
+    restart: always
+    env_file:
+      - .env
+    build:
+      dockerfile: ./Dockerfile
+      context: ./pgadmin
+    ports:
+      - "5432:5432"
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
