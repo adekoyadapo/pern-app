@@ -10,11 +10,11 @@ const EditTodo = ({ todo }) => {
     try {
       const body = { description };
       const response = await fetch(
-        `http://10.0.10.13:5500/todos/${todo.todo_id}`,
+        `http://10.0.10.10:5500/todos/${todo.todo_id}`,
         {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(body)
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
         }
       );
 
